@@ -1,0 +1,310 @@
+[
+    {
+        "id": "T1595",
+        "name": "Active Scanning",
+        "tactic": "Reconnaissance",
+        "description": "Adversaries may execute active reconnaissance scans to gather information that can be used during targeting. Active scans probe infrastructure via network traffic.",
+        "keywords": [
+            "scan",
+            "nmap",
+            "probe",
+            "port scan",
+            "sweep",
+            "recon",
+            "network scan",
+            "host discovery"
+        ]
+    },
+    {
+        "id": "T1190",
+        "name": "Exploit Public-Facing Application",
+        "tactic": "Initial Access",
+        "description": "Adversaries may attempt to take advantage of a weakness in an Internet-facing computer or program using software, data, or commands.",
+        "keywords": [
+            "exploit",
+            "vulnerability",
+            "cve",
+            "injection",
+            "sqli",
+            "rce",
+            "remote code",
+            "shellcode",
+            "buffer overflow",
+            "command injection"
+        ]
+    },
+    {
+        "id": "T1110",
+        "name": "Brute Force",
+        "tactic": "Credential Access",
+        "description": "Adversaries may use brute force techniques to gain access to accounts when passwords are unknown or password hashes are obtained.",
+        "keywords": [
+            "brute force",
+            "brute",
+            "password spray",
+            "credential stuffing",
+            "login attempt",
+            "authentication failed",
+            "multiple failed",
+            "ssh failed"
+        ]
+    },
+    {
+        "id": "T1059",
+        "name": "Command and Scripting Interpreter",
+        "tactic": "Execution",
+        "description": "Adversaries may abuse command and script interpreters to execute commands, scripts, or binaries.",
+        "keywords": [
+            "bash",
+            "powershell",
+            "cmd",
+            "shell",
+            "script",
+            "interpreter",
+            "command execution",
+            "cgi",
+            "webshell"
+        ]
+    },
+    {
+        "id": "T1486",
+        "name": "Data Encrypted for Impact",
+        "tactic": "Impact",
+        "description": "Adversaries may encrypt data on target systems or on large numbers of systems in a network to interrupt availability to system and network resources.",
+        "keywords": [
+            "ransomware",
+            "encrypt",
+            "ransom",
+            "sodinokibi",
+            "lockbit",
+            "ryuk",
+            "wannacry",
+            "darkside"
+        ]
+    },
+    {
+        "id": "T1071",
+        "name": "Application Layer Protocol",
+        "tactic": "Command and Control",
+        "description": "Adversaries may communicate using OSI application layer protocols to avoid detection/network filtering.",
+        "keywords": [
+            "c2",
+            "command and control",
+            "beacon",
+            "cnc",
+            "malware traffic",
+            "c&c",
+            "covert channel",
+            "dns tunneling",
+            "http tunnel"
+        ]
+    },
+    {
+        "id": "T1046",
+        "name": "Network Service Scanning",
+        "tactic": "Discovery",
+        "description": "Adversaries may attempt to get a listing of services running on remote hosts and local network infrastructure devices.",
+        "keywords": [
+            "service scan",
+            "port scan",
+            "service discovery",
+            "version scan",
+            "os detection",
+            "fingerprint"
+        ]
+    },
+    {
+        "id": "T1498",
+        "name": "Network Denial of Service",
+        "tactic": "Impact",
+        "description": "Adversaries may perform Network Denial of Service (DoS) attacks to degrade or block the availability of targeted resources to users.",
+        "keywords": [
+            "dos",
+            "ddos",
+            "denial of service",
+            "flood",
+            "syn flood",
+            "udp flood",
+            "http flood",
+            "volumetric"
+        ]
+    },
+    {
+        "id": "T1078",
+        "name": "Valid Accounts",
+        "tactic": "Defense Evasion",
+        "description": "Adversaries may obtain and abuse credentials of existing accounts as a means of gaining Initial Access, Persistence, or Privilege Escalation.",
+        "keywords": [
+            "valid account",
+            "stolen credential",
+            "compromised account",
+            "account takeover",
+            "login session",
+            "legitimate user"
+        ]
+    },
+    {
+        "id": "T1021",
+        "name": "Remote Services",
+        "tactic": "Lateral Movement",
+        "description": "Adversaries may use valid accounts to log into a service specifically designed to accept remote connections.",
+        "keywords": [
+            "ssh",
+            "rdp",
+            "vnc",
+            "remote desktop",
+            "remote login",
+            "smb",
+            "winrm",
+            "lateral movement"
+        ]
+    },
+    {
+        "id": "T1505",
+        "name": "Server Software Component",
+        "tactic": "Persistence",
+        "description": "Adversaries may abuse legitimate extensible development features of servers to establish persistent access to systems.",
+        "keywords": [
+            "webshell",
+            "backdoor",
+            "plugin",
+            "module",
+            "server component",
+            "web backdoor",
+            "php shell"
+        ]
+    },
+    {
+        "id": "T1562",
+        "name": "Impair Defenses",
+        "tactic": "Defense Evasion",
+        "description": "Adversaries may maliciously modify components of a victim environment in order to hinder or disable defensive mechanisms.",
+        "keywords": [
+            "disable firewall",
+            "disable antivirus",
+            "evasion",
+            "bypass",
+            "tamper",
+            "disable logging",
+            "clear logs"
+        ]
+    },
+    {
+        "id": "T1041",
+        "name": "Exfiltration Over C2 Channel",
+        "tactic": "Exfiltration",
+        "description": "Adversaries may steal data by exfiltrating it over an existing command-and-control channel.",
+        "keywords": [
+            "exfiltration",
+            "data theft",
+            "data leak",
+            "upload",
+            "onion",
+            "tor",
+            "dns exfil",
+            "ftp upload"
+        ]
+    },
+    {
+        "id": "T1547",
+        "name": "Boot or Logon Autostart Execution",
+        "tactic": "Persistence",
+        "description": "Adversaries may configure system settings to automatically execute a program during system boot or logon.",
+        "keywords": [
+            "autostart",
+            "registry run",
+            "startup",
+            "cron",
+            "scheduled task",
+            "persistence",
+            "autorun"
+        ]
+    },
+    {
+        "id": "T1055",
+        "name": "Process Injection",
+        "tactic": "Privilege Escalation",
+        "description": "Adversaries may inject code into processes in order to evade process-based defenses as well as possibly elevate privileges.",
+        "keywords": [
+            "process injection",
+            "dll injection",
+            "code injection",
+            "memory injection",
+            "hollowing",
+            "reflective"
+        ]
+    },
+    {
+        "id": "T1087",
+        "name": "Account Discovery",
+        "tactic": "Discovery",
+        "description": "Adversaries may attempt to get a listing of accounts on a system or within an environment.",
+        "keywords": [
+            "account discovery",
+            "user enumeration",
+            "ldap query",
+            "active directory",
+            "useradd",
+            "user created",
+            "new user"
+        ]
+    },
+    {
+        "id": "T1203",
+        "name": "Exploitation for Client Execution",
+        "tactic": "Execution",
+        "description": "Adversaries may exploit software vulnerabilities in client applications to execute code.",
+        "keywords": [
+            "client exploit",
+            "browser exploit",
+            "pdf exploit",
+            "office exploit",
+            "zero day",
+            "0day"
+        ]
+    },
+    {
+        "id": "T1566",
+        "name": "Phishing",
+        "tactic": "Initial Access",
+        "description": "Adversaries may send phishing messages to gain access to victim systems.",
+        "keywords": [
+            "phishing",
+            "spearphishing",
+            "malicious email",
+            "attachment",
+            "malicious link",
+            "social engineering"
+        ]
+    },
+    {
+        "id": "T1569",
+        "name": "System Services",
+        "tactic": "Execution",
+        "description": "Adversaries may abuse system services or daemons to execute commands or programs.",
+        "keywords": [
+            "service execution",
+            "at command",
+            "systemctl",
+            "service start",
+            "daemon",
+            "cron job"
+        ]
+    },
+    {
+        "id": "T1082",
+        "name": "System Information Discovery",
+        "tactic": "Discovery",
+        "description": "An adversary may attempt to get detailed information about the operating system and hardware.",
+        "keywords": [
+            "system info",
+            "os version",
+            "uname",
+            "hostname",
+            "systeminfo",
+            "whoami",
+            "ifconfig",
+            "ipconfig"
+        ]
+    }
+]

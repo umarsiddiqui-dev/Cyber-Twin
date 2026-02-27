@@ -1,0 +1,61 @@
+services:
+  # ──────────────────────────────
+  # PostgreSQL Database
+  # ──────────────────────────────
+  db:
+    image: postgres:15-alpine
+    container_name: cybertwin_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: cybertwin
+      POSTGRES_PASSWORD: cybertwin
+      POSTGRES_DB: cybertwin_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U cybertwin -d cybertwin_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ──────────────────────────────
+  # FastAPI Backend
+  # ──────────────────────────────
+  backend:
+    build:
+      context: ./cybertwin-backend
+      dockerfile: Dockerfile
+    container_name: cybertwin_backend
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      DATABASE_URL: postgresql+asyncpg://cybertwin:cybertwin@db:5432/cybertwin_db
+      DEBUG: "true"
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      - ./cybertwin-backend:/app
+
+  # ──────────────────────────────
+  # React Frontend (dev)
+  # ──────────────────────────────
+  frontend:
+    build:
+      context: ./cybertwin-frontend
+      dockerfile: Dockerfile
+    container_name: cybertwin_frontend
+    restart: unless-stopped
+    ports:
+      - "5173:5173"
+    depends_on:
+      - backend
+    volumes:
+      - ./cybertwin-frontend:/app
+      - /app/node_modules
+
+volumes:
+  postgres_data:

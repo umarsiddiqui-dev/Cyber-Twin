@@ -1,0 +1,141 @@
+[
+    {
+        "id": "ssh_brute_force",
+        "name": "SSH Brute Force Campaign",
+        "description": "Simulates a sustained credential brute-force attack against port 22 from an external threat actor.",
+        "mitre_tactics": [
+            "Credential Access",
+            "Initial Access"
+        ],
+        "severity": "HIGH",
+        "duration_seconds": 30,
+        "log_sequence": [
+            "[**] [1:2001219:20] ET SCAN Potential SSH Scan OUTBOUND [**] [Classification: Attempted Information Leak] [Priority: 2] {TCP} 45.33.32.156 -> 192.168.1.100:22",
+            "Rule: 5716 (level 10) -> 'SSHD brute force trying to get access to the system.'\nAuthentication failed for user root from Src IP: 45.33.32.156",
+            "Rule: 5716 (level 10) -> 'SSHD brute force trying to get access to the system.'\nAuthentication failed for user admin from Src IP: 45.33.32.156",
+            "[**] [1:2001219:20] ET SCAN Potential SSH Scan OUTBOUND [**] [Classification: Attempted Information Leak] [Priority: 2] {TCP} 45.33.32.156 -> 192.168.1.101:22",
+            "Rule: 5716 (level 10) -> 'SSHD brute force trying to get access to the system.'\nAuthentication failed for user deploy from Src IP: 45.33.32.156",
+            "Rule: 5716 (level 10) -> 'SSHD brute force trying to get access to the system.'\nAuthentication failed for user ubuntu from Src IP: 45.33.32.156"
+        ]
+    },
+    {
+        "id": "port_scan_exploit",
+        "name": "Port Scan + Exploitation",
+        "description": "Attacker performs network reconnaissance then attempts service exploitation.",
+        "mitre_tactics": [
+            "Reconnaissance",
+            "Execution"
+        ],
+        "severity": "HIGH",
+        "duration_seconds": 25,
+        "log_sequence": [
+            "[**] [1:2016922:3] ET SCAN Nmap OS Detection Probe [**] [Classification: Attempted Information Leak] [Priority: 3] {TCP} 192.241.173.241 -> 192.168.1.100:443",
+            "[**] [1:2001831:17] ET SCAN Nmap Scripting Engine User-Agent Detected [**] [Classification: Web Application Attack] [Priority: 1] {TCP} 192.241.173.241 -> 192.168.1.100:8080",
+            "[**] [1:2009358:5] ET EXPLOIT Possible CVE-2014-6271 Attempt Bash RCE via CGI [**] [Classification: Attempted Administrator Privilege Gain] [Priority: 1] {TCP} 192.241.173.241 -> 192.168.1.100:80",
+            "[**] [1:2019284:4] ET WEB_SERVER PHP Easter Egg Information Disclosure [**] [Classification: Attempted Information Leak] [Priority: 2] {TCP} 192.241.173.241:4444 -> 192.168.1.100:80"
+        ]
+    },
+    {
+        "id": "sql_injection",
+        "name": "SQL Injection Attack",
+        "description": "Web application SQL injection attempt detected by WAF and application logs.",
+        "mitre_tactics": [
+            "Initial Access",
+            "Credential Access"
+        ],
+        "severity": "HIGH",
+        "duration_seconds": 20,
+        "log_sequence": [
+            "Rule: 100100 (level 12) -> 'SQL injection attempt detected in web request.'\nPayload detected via WAF - Src IP: 104.236.246.116 -> Dst: 192.168.1.200:80",
+            "Rule: 100100 (level 12) -> 'SQL injection attempt detected in web request.'\nPayload: ' OR 1=1-- Src IP: 104.236.246.116 -> Dst: 192.168.1.200:80",
+            "Rule: 100100 (level 12) -> 'SQL injection attempt detected in web request.'\nPayload: UNION SELECT username,password FROM users Src IP: 104.236.246.116 -> Dst: 192.168.1.200:80",
+            "[**] [1:2019284:4] ET WEB_SERVER Suspicious POST to database endpoint [**] [Classification: Web Application Attack] [Priority: 1] {TCP} 104.236.246.116 -> 192.168.1.200:5432"
+        ]
+    },
+    {
+        "id": "ransomware_beacon",
+        "name": "Ransomware C2 Beacon",
+        "description": "Host infected with ransomware beacon establishing command and control.",
+        "mitre_tactics": [
+            "Command and Control",
+            "Impact"
+        ],
+        "severity": "CRITICAL",
+        "duration_seconds": 35,
+        "log_sequence": [
+            "[**] [1:2260002:1] ET MALWARE Win32.Ransomware.Sodinokibi CnC Beacon [**] [Classification: Malware Command and Control Activity Detected] [Priority: 1] {TCP} 192.168.1.100:49234 -> 159.65.67.130:443",
+            "Rule: 80792 (level 14) -> 'Multiple trojans, rootkits or suspicious files detected. System may be compromised.'\nFiles changed: /tmp/payload.sh - Src IP: 192.168.1.100",
+            "[**] [1:2406697:3134] ET DOS Excessive Web Requests - Possible DDoS [**] [Classification: Denial of Service Attack] [Priority: 1] {TCP} 159.65.67.130:443 -> 192.168.1.100:49234",
+            "[**] [1:2260002:1] ET MALWARE Win32.Ransomware.Sodinokibi CnC Beacon [**] [Classification: Malware Command and Control Activity Detected] [Priority: 1] {TCP} 192.168.1.100:49236 -> 138.197.0.113:443",
+            "Rule: 80792 (level 14) -> 'Multiple trojans, rootkits or suspicious files detected. System may be compromised.'\nFiles changed: C:\\Users\\Public\\decrypt.exe - Src IP: 192.168.1.100"
+        ]
+    },
+    {
+        "id": "ddos_surge",
+        "name": "DDoS Traffic Surge",
+        "description": "Volumetric denial-of-service attack targeting the web tier.",
+        "mitre_tactics": [
+            "Impact"
+        ],
+        "severity": "CRITICAL",
+        "duration_seconds": 20,
+        "log_sequence": [
+            "[**] [1:2406697:3134] ET DOS Excessive Web Requests - Possible DDoS [**] [Classification: Denial of Service Attack] [Priority: 1] {TCP} 206.189.91.155:4421 -> 192.168.1.200:443",
+            "[**] [1:2406697:3134] ET DOS Excessive Web Requests - Possible DDoS [**] [Classification: Denial of Service Attack] [Priority: 1] {TCP} 167.99.150.222:6612 -> 192.168.1.200:443",
+            "[**] [1:2406697:3134] ET DOS Excessive Web Requests - Possible DDoS [**] [Classification: Denial of Service Attack] [Priority: 1] {TCP} 68.183.108.112:9921 -> 192.168.1.200:80",
+            "[**] [1:2406697:3134] ET DOS Excessive Web Requests - Possible DDoS [**] [Classification: Denial of Service Attack] [Priority: 1] {TCP} 45.33.32.156:11132 -> 192.168.1.200:443"
+        ]
+    },
+    {
+        "id": "privilege_escalation",
+        "name": "Privilege Escalation",
+        "description": "Internal user attempting to escalate privileges through misuse of sudo and system tools.",
+        "mitre_tactics": [
+            "Privilege Escalation",
+            "Defense Evasion"
+        ],
+        "severity": "HIGH",
+        "duration_seconds": 25,
+        "log_sequence": [
+            "Rule: 5552 (level 8) -> 'useradd or groupadd used: User added to the system.'\nNew user created from Src IP: 10.0.0.55",
+            "Rule: 80792 (level 14) -> 'Multiple trojans, rootkits or suspicious files detected. System may be compromised.'\nFiles changed: /etc/sudoers - Src IP: 10.0.0.55",
+            "Rule: 5501 (level 8) -> 'Login session opened.'\nSession opened for user root by 10.0.0.55",
+            "Rule: 30105 (level 6) -> 'Web server client denied access to restricted resource.'\nAttempted access to /admin from Src IP: 10.0.0.55"
+        ]
+    },
+    {
+        "id": "lateral_movement",
+        "name": "Lateral Movement Sweep",
+        "description": "Compromised internal host scanning and spreading across the network.",
+        "mitre_tactics": [
+            "Lateral Movement",
+            "Reconnaissance"
+        ],
+        "severity": "HIGH",
+        "duration_seconds": 30,
+        "log_sequence": [
+            "[**] [1:2010937:3] ET POLICY Suspicious inbound to MSSQL port 1433 [**] [Classification: Potentially Bad Traffic] [Priority: 3] {TCP} 10.0.0.55 -> 192.168.1.101:1433",
+            "[**] [1:2001219:20] ET SCAN Potential SSH Scan OUTBOUND [**] [Classification: Attempted Information Leak] [Priority: 2] {TCP} 10.0.0.55 -> 192.168.1.200:22",
+            "Rule: 31101 (level 7) -> 'Web server 500 error code (Internal Error).'\nSrc IP: 10.0.0.55 - request to 192.168.1.200",
+            "[**] [1:2013028:5] ET POLICY GNU/Linux APT User-Agent Outbound [**] [Classification: Potentially Bad Traffic] [Priority: 3] {TCP} 10.0.0.55 -> 192.168.1.100:80",
+            "[**] [1:2001831:17] ET SCAN Nmap Scripting Engine User-Agent Detected [**] [Classification: Web Application Attack] [Priority: 1] {TCP} 10.0.0.55 -> 192.168.1.100:9200"
+        ]
+    },
+    {
+        "id": "data_exfiltration",
+        "name": "Data Exfiltration",
+        "description": "Sensitive data being exfiltrated to an external server over encrypted channel.",
+        "mitre_tactics": [
+            "Exfiltration",
+            "Command and Control"
+        ],
+        "severity": "CRITICAL",
+        "duration_seconds": 25,
+        "log_sequence": [
+            "[**] [1:2012799:2] ET POLICY HTTP Request to a *.onion proxy domain [**] [Classification: Potentially Bad Traffic] [Priority: 2] {TCP} 192.168.1.100:55210 -> 178.62.62.190:80",
+            "[**] [1:2013028:5] ET POLICY Outbound Large Data Transfer [**] [Classification: Potentially Bad Traffic] [Priority: 2] {TCP} 192.168.1.100:55211 -> 178.62.62.190:443",
+            "Rule: 80792 (level 14) -> 'Multiple trojans, rootkits or suspicious files detected. System may be compromised.'\nLarge file transfer detected from /var/db/customers.sql - Src IP: 192.168.1.100",
+            "[**] [1:2012799:2] ET POLICY HTTP Request to a *.onion proxy domain [**] [Classification: Potentially Bad Traffic] [Priority: 2] {TCP} 192.168.1.100:55213 -> 178.62.62.190:80"
+        ]
+    }
+]
