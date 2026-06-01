@@ -36,6 +36,12 @@ class Settings(BaseSettings):
     # ── Phase 3 AI ────────────────────────────────────────────────────────────
     OPENAI_API_KEY: str = ""
 
+    # ── Phase 7: Local Ollama LLM ─────────────────────────────────────────────
+    # Override in .env: OLLAMA_BASE_URL=http://localhost:11434
+    OLLAMA_BASE_URL: str = "http://localhost:11434"
+    # Override in .env: OLLAMA_MODEL=gemma4:e2b
+    OLLAMA_MODEL: str = "gemma4:e2b"
+
     # ── Phase 4: Action execution safety gate ─────────────────────────────────
     # WARNING: Keep this False in development.
     # Set to true ONLY in a controlled lab environment.

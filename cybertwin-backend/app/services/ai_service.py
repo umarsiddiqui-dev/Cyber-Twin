@@ -1,13 +1,12 @@
 """
-AI Service – Phase 3 Core
-Replaces echo_service.py. Provides context-aware responses using:
-  - OpenAI GPT-4o (when OPENAI_API_KEY is configured)
-  - Local MITRE ATT&CK classifier (always available, no key needed)
-  - Conversation memory for multi-turn dialogue
+AI Service – Phase 7
+Request routing order:
+  1. Local Ollama (gemma4:e2b) with full project context injected  ← PRIMARY
+  2. OpenAI GPT-4o (when OPENAI_API_KEY is configured)             ← SECONDARY
+  3. Structured offline fallback (MITRE + keywords)                ← TERTIARY
 
-This module is the REPLACEMENT POINT committed in Phase 1.
-The router signature remains unchanged: accepts a message string,
-returns a dict with reply, session_id, timestamp, and enrichment fields.
+The router signature is unchanged: /api/chat → chat.py → get_response().
+No UI changes.
 """
 
 import uuid
@@ -16,6 +15,8 @@ from datetime import datetime, timezone
 
 from app.config import settings
 from app.services import mitre_service, risk_scorer, conversation_memory
+from app.services.ollama_client import generate as ollama_generate, CYBERTWIN_SYSTEM_PROMPT
+from app.services.context_indexer import get_project_context
 
 logger = logging.getLogger(__name__)
 
@@ -161,19 +162,72 @@ async def get_response(
         mitre_match=mitre_match,
     )
 
-    # ── Step 3: Attempt GPT-4o call ───────────────────────────────────────────
+    # ── Step 3a: Ollama (gemma4:e2b) – PRIMARY ───────────────────────────────
     reply_text = None
-    if settings.OPENAI_API_KEY:
+    try:
+        # Gather project context to inject into the 128K window
+        project_ctx = get_project_context()
+
+        # Gather ML model + knowledge-base metadata
+        try:
+            from ml_pipeline.cybertwin_core import agent as _agent
+            model_ready  = _agent._models.is_available() and _agent._models._loaded
+            classes      = list(_agent._models.le.classes_) if model_ready else []
+            mitre_count  = len(_agent._kb.mitre) if _agent._kb._loaded else 0
+            cve_count    = len(_agent._kb.cves) if _agent._kb._loaded else 0
+        except Exception:
+            model_ready, classes, mitre_count, cve_count = False, [], 0, 0
+
+        # Build the enriched prompt (context + conversation history + user message)
+        history = conversation_memory.get_history(sid)
+        history_text = ""
+        for turn in history[-6:]:   # last 3 full turns to avoid prompt bloat
+            role_label = "User" if turn["role"] == "user" else "CyberTwin"
+            history_text += f"\n{role_label}: {turn['content']}"
+
+        ml_section = (
+            f"\n\n[CyberTwin ML Engine]\n"
+            f"- Classifier: {'ACTIVE' if model_ready else 'INACTIVE'}\n"
+            f"- Threat classes: {classes}\n"
+            f"- MITRE ATT&CK techniques: {mitre_count}\n"
+            f"- NVD CVEs indexed: {cve_count}\n"
+        )
+        mitre_section = f"\n[MITRE Match]\n{mitre_context}" if mitre_context else ""
+        incidents_section = ""
+        if recent_incidents:
+            inc_text = "\n".join(f"- {i}" for i in recent_incidents[:5])
+            incidents_section = f"\n[Recent Incidents]\n{inc_text}"
+
+        full_prompt = (
+            f"[PROJECT SOURCE FILES]\n{project_ctx}\n"
+            f"{ml_section}{mitre_section}{incidents_section}"
+            f"{history_text}\n\nUser: {message}\nCyberTwin:"
+        )
+
+        reply_text = await ollama_generate(
+            prompt=full_prompt,
+            system=CYBERTWIN_SYSTEM_PROMPT,
+        )
+        if reply_text:
+            logger.info("[AI] Response served by Ollama (gemma4:e2b)")
+    except Exception as e:
+        logger.error(f"[AI] Ollama pipeline error: {e}")
+        reply_text = None
+
+    # ── Step 3b: OpenAI GPT-4o – SECONDARY ───────────────────────────────────
+    if reply_text is None and settings.OPENAI_API_KEY:
         try:
             from openai import AsyncOpenAI
             client = AsyncOpenAI(api_key=settings.OPENAI_API_KEY)
 
-            # Build system context
-            from ml_pipeline.cybertwin_core import agent
-            model_ready = agent._models.is_available() and agent._models._loaded
-            classes = list(agent._models.le.classes_) if model_ready else []
-            mitre_count = len(agent._kb.mitre) if agent._kb._loaded else 0
-            cve_count = len(agent._kb.cves) if agent._kb._loaded else 0
+            try:
+                from ml_pipeline.cybertwin_core import agent as _agent
+                model_ready  = _agent._models.is_available() and _agent._models._loaded
+                classes      = list(_agent._models.le.classes_) if model_ready else []
+                mitre_count  = len(_agent._kb.mitre) if _agent._kb._loaded else 0
+                cve_count    = len(_agent._kb.cves) if _agent._kb._loaded else 0
+            except Exception:
+                model_ready, classes, mitre_count, cve_count = False, [], 0, 0
 
             sys_content = _SYSTEM_PROMPT
             sys_content += (
@@ -189,20 +243,19 @@ async def get_response(
                 inc_text = "\n".join(f"- {i}" for i in recent_incidents[:5])
                 sys_content += f"\nRecent active incidents:\n{inc_text}"
 
-            # Fetch conversation history
-            history = conversation_memory.get_history(sid)
-
-            messages = [{"role": "system", "content": sys_content}]
+            history   = conversation_memory.get_history(sid)
+            messages  = [{"role": "system", "content": sys_content}]
             messages.extend(history)
             messages.append({"role": "user", "content": message})
 
-            response = await client.chat.completions.create(
+            response   = await client.chat.completions.create(
                 model="gpt-4o",
                 messages=messages,
-                temperature=0.2,      # Low creativity → factually reliable
+                temperature=0.2,
                 max_tokens=800,
             )
             reply_text = response.choices[0].message.content.strip()
+            logger.info("[AI] Response served by OpenAI GPT-4o (fallback)")
 
         except Exception as e:
             logger.error(f"[AI] OpenAI request failed: {e}")
