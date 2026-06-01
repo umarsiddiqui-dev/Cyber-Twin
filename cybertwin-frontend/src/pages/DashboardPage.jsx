@@ -55,12 +55,12 @@ function DashboardPage() {
                         <div className="card">
                             <div className="card-title"><span>📋</span> CyberTwin Status</div>
                             <div style={{ fontSize: 13, color: 'var(--clr-text-secondary)', lineHeight: 1.9 }}>
-                                <p>✅ &nbsp;Phases 1–5 complete</p>
-                                <p>✅ &nbsp;AI Core (GPT-4o + offline fallback)</p>
+                                <p>✅ &nbsp;Phases 1–7 complete</p>
+                                <p>✅ &nbsp;AI Core – Gemma 4 via Ollama (local)</p>
+                                <p>✅ &nbsp;128K context window with project files</p>
                                 <p>✅ &nbsp;MITRE ATT&amp;CK classification</p>
-                                <p>✅ &nbsp;Risk scoring engine</p>
-                                <p>✅ &nbsp;Action approval workflow</p>
-                                <p>✅ &nbsp;Voice STT/TTS (Chrome/Edge)</p>
+                                <p>✅ &nbsp;ML Classifier (LightGBM + RF)</p>
+                                <p>✅ &nbsp;Risk scoring &amp; action approval</p>
                                 <p>✅ &nbsp;Attack scenario simulation</p>
                             </div>
                         </div>
