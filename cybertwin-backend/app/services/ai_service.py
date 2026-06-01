@@ -42,9 +42,55 @@ You have access to real-time incident data from this SOC session."""
 def _build_offline_response(message: str, mitre_match) -> str:
     """
     Structured offline reply when OpenAI is unavailable.
-    Uses MITRE data and keyword analysis to give a useful answer.
+    Uses MITRE data, NVD CVE info, and keyword analysis to give a useful answer.
     """
     lower = message.lower()
+
+    # ── Handle direct queries about Phase 6 ML status/classes/knowledge base ──
+    from ml_pipeline.cybertwin_core import agent
+    model_ready = agent._models.is_available() and agent._models._loaded
+    classes = list(agent._models.le.classes_) if model_ready else [
+        "Benign", "Botnet", "BruteForce-FTP", "BruteForce-SSH",
+        "BruteForce-Web", "BruteForce-XSS", "DDoS-HOIC", "DDoS-LOIC",
+        "DDoS-LOIC-UDP", "DoS-GoldenEye", "DoS-Hulk", "DoS-SlowHTTP",
+        "DoS-Slowloris", "Infiltration", "SQLInjection"
+    ]
+    mitre_count = len(agent._kb.mitre) if agent._kb._loaded else 0
+    cve_count = len(agent._kb.cves) if agent._kb._loaded else 0
+
+    if "ml status" in lower or "model status" in lower or "cyber twin status" in lower:
+        status_str = "🟢 Active & Loaded" if model_ready else "🟡 Training or Loading (Fallback Active)"
+        return (
+            f"🛡️ **CyberTwin ML Model Status**\n\n"
+            f"- **Ensemble Engine:** LightGBM + Random Forest\n"
+            f"- **Status:** {status_str}\n"
+            f"- **Dataset:** CSE-CIC-IDS2018 (Traffic Flow ML)\n"
+            f"- **Classes Loaded:** {len(classes)} network threat classes\n"
+            f"- **MITRE techniques indexed:** {mitre_count}\n"
+            f"- **NVD CVEs indexed:** {cve_count}\n"
+        )
+
+    if "class" in lower or "detect" in lower or "attack type" in lower:
+        class_list = "\n".join(f"- {c}" for c in classes)
+        return (
+            f"📊 **CyberTwin Classification Categories**\n\n"
+            f"The ML engine is trained to classify network traffic into the following {len(classes)} categories:\n"
+            f"{class_list}\n"
+        )
+
+    if "cve" in lower or "vulnerabilit" in lower:
+        # Show a sample of highest CVSS CVEs from local KB
+        cve_info = ""
+        if agent._kb._loaded and agent._kb.cves:
+            top_cves = sorted(agent._kb.cves.values(), key=lambda x: x.get("cvss_score", 0), reverse=True)[:3]
+            cve_info = "\n\n**Top Vulnerabilities in Local KB:**\n" + "\n".join(
+                f"- **{c['id']}** (CVSS: {c['cvss_score']} - {c['severity']}): {c['description'][:120]}..."
+                for c in top_cves
+            )
+        return (
+            f"🔍 **NVD CVE Vulnerability Index**\n\n"
+            f"Total indexed CVEs: **{cve_count:,}** from NVD modified feed.{cve_info}\n"
+        )
 
     if mitre_match:
         m = mitre_match
@@ -78,9 +124,11 @@ def _build_offline_response(message: str, mitre_match) -> str:
         "In offline mode, I can still:\n"
         "- Classify alerts against MITRE ATT&CK\n"
         "- Compute risk scores\n"
+        "- Query our local ML Model Status & Classes ('ml status', 'classes')\n"
         "- Display live security events on the dashboard\n\n"
         "Configure the API key to unlock full NLP threat analysis."
     )
+
 
 
 async def get_response(
@@ -121,12 +169,25 @@ async def get_response(
             client = AsyncOpenAI(api_key=settings.OPENAI_API_KEY)
 
             # Build system context
+            from ml_pipeline.cybertwin_core import agent
+            model_ready = agent._models.is_available() and agent._models._loaded
+            classes = list(agent._models.le.classes_) if model_ready else []
+            mitre_count = len(agent._kb.mitre) if agent._kb._loaded else 0
+            cve_count = len(agent._kb.cves) if agent._kb._loaded else 0
+
             sys_content = _SYSTEM_PROMPT
+            sys_content += (
+                f"\n\n[Local Security Model Info]\n"
+                f"- Threat Classifier Status: {'ACTIVE & LOADED' if model_ready else 'INACTIVE/TRAINING'}\n"
+                f"- Trained Threat Classes: {classes}\n"
+                f"- MITRE ATT&CK techniques index: {mitre_count} techniques\n"
+                f"- NVD CVE database index: {cve_count} CVEs\n"
+            )
             if mitre_context:
-                sys_content += f"\n\nRelevant threat context:\n{mitre_context}"
+                sys_content += f"\nRelevant threat context:\n{mitre_context}"
             if recent_incidents:
                 inc_text = "\n".join(f"- {i}" for i in recent_incidents[:5])
-                sys_content += f"\n\nRecent active incidents:\n{inc_text}"
+                sys_content += f"\nRecent active incidents:\n{inc_text}"
 
             # Fetch conversation history
             history = conversation_memory.get_history(sid)

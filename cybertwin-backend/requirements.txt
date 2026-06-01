@@ -27,3 +27,4 @@ openai>=1.35.0
 
 # ── Phase 2 Threat Intel – MITRE ATT&CK STIX 2.0 ─────────────────────────────
 mitreattack-python>=3.0.6
+aiosqlite>=0.20.0

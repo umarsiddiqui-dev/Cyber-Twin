@@ -70,7 +70,7 @@ SECRET_KEY=generate-a-secure-64-char-hex-string
 ADMIN_USERNAME=admin
 ADMIN_PASSWORD=your_secure_password
 DEBUG=false
-```
+```             
 
 ### 2. Frontend Initialization
 

@@ -1,6 +1,6 @@
 """
-CyberTwin Backend – Entry Point (Phase 5)
-Starts the log monitoring background task and conversation memory cleanup.
+CyberTwin Backend – Entry Point (Phase 6)
+Starts log monitoring, ML model loading, and knowledge base indexing.
 """
 
 import asyncio
@@ -16,6 +16,7 @@ from app.routers import health, chat, incidents
 from app.routers.actions import router as actions_router
 from app.routers.simulation import router as simulation_router  # Phase 5
 from app.routers.export import router as export_router          # Phase 5
+from app.routers.ml_classify import router as ml_router        # Phase 6
 from app.auth.router import router as auth_router               # Phase 1 security
 from app.ws.log_stream import router as ws_router
 from app.services.incident_service import ingest_raw_log
@@ -37,6 +38,15 @@ async def lifespan(app: FastAPI):
       Cancel the monitor task cleanly.
     """
     await create_tables()
+
+    # ── Load ML model + knowledge base (Phase 6) ───────────────────────────
+    from app.services import ml_service as _ml
+    try:
+        import asyncio as _asyncio
+        await _asyncio.get_event_loop().run_in_executor(None, _ml.startup)
+        logger.info("[Startup] ML model + knowledge base loaded")
+    except Exception as e:
+        logger.warning(f"[Startup] ML model not loaded (run model_trainer.py first): {e}")
 
     # ── Start conversation memory cleanup task (Phase 3) ──────────────────────
     from app.services import conversation_memory
@@ -101,10 +111,11 @@ app.include_router(incidents.router,   prefix="/api")
 app.include_router(actions_router,     prefix="/api")   # Phase 4
 app.include_router(simulation_router,  prefix="/api")   # Phase 5
 app.include_router(export_router,      prefix="/api")   # Phase 5
+app.include_router(ml_router,          prefix="/api")   # Phase 6
 app.include_router(ws_router)
 
 
 @app.get("/", tags=["root"])
 async def root():
-    return {"service": "CyberTwin Backend", "version": "5.0.0", "status": "operational"}
+    return {"service": "CyberTwin Backend", "version": "6.0.0", "status": "operational"}
 

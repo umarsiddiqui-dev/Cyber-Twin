@@ -44,3 +44,7 @@ alembic/versions/*.pyc
 .pytest_cache/
 htmlcov/
 .coverage
+
+# Large Datasets and ML Models
+fyp dataset/
+*.npy

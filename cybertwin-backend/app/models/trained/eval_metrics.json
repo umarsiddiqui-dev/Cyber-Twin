@@ -1,0 +1,23 @@
+{
+  "macro_f1": 0.6583,
+  "classes": [
+    "Benign",
+    "Botnet",
+    "BruteForce-FTP",
+    "BruteForce-SSH",
+    "BruteForce-Web",
+    "BruteForce-XSS",
+    "DDOS attack-HOIC",
+    "DDoS attacks-LOIC-HTTP",
+    "DDoS-LOIC-UDP",
+    "DoS-GoldenEye",
+    "DoS-Hulk",
+    "DoS-SlowHTTP",
+    "DoS-Slowloris",
+    "Infiltration",
+    "SQLInjection"
+  ],
+  "train_rows": 2151167,
+  "test_rows": 1264001,
+  "train_time_seconds": 528.5
+}
