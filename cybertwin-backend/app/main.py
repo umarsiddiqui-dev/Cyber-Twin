@@ -1,6 +1,7 @@
 """
-CyberTwin Backend – Entry Point (Phase 6)
-Starts log monitoring, ML model loading, and knowledge base indexing.
+CyberTwin Backend – Entry Point (Phase 7)
+Starts log monitoring, ML model loading, knowledge base indexing,
+and Ollama LLM warm-up ping.
 """
 
 import asyncio
@@ -53,6 +54,25 @@ async def lifespan(app: FastAPI):
     memory_task = conversation_memory.start_cleanup_task()
     logger.info("[Startup] Conversation memory cleanup task started")
 
+    # ── Ollama warm-up ping (Phase 7) ─────────────────────────────────────────
+    from app.services.ollama_client import health_check as ollama_health
+    _ollama = await ollama_health()
+    if _ollama["ollama_reachable"] and _ollama["model_loaded"]:
+        logger.info(
+            f"[Startup] ✅ Ollama reachable – model '{settings.OLLAMA_MODEL}' loaded and ready"
+        )
+    elif _ollama["ollama_reachable"]:
+        logger.warning(
+            f"[Startup] ⚠️  Ollama reachable but model '{settings.OLLAMA_MODEL}' not yet pulled. "
+            f"Run: ollama pull {settings.OLLAMA_MODEL}"
+        )
+    else:
+        logger.warning(
+            "[Startup] ⚠️  Ollama not reachable at %s – chatbot will use offline fallback. "
+            "Start Ollama with: ollama serve",
+            settings.OLLAMA_BASE_URL,
+        )
+
     # ── Choose monitoring track ───────────────────────────────────────────────
     if settings.LOG_FILE_PATH:
         from app.services.log_tailer import tail_log_file
@@ -90,7 +110,7 @@ async def lifespan(app: FastAPI):
 app = FastAPI(
     title="CyberTwin API",
     description="AI-Powered SOC Assistant – Backend API",
-    version="5.0.0",
+    version="7.0.0",
     lifespan=lifespan,
 )
 
@@ -117,5 +137,5 @@ app.include_router(ws_router)
 
 @app.get("/", tags=["root"])
 async def root():
-    return {"service": "CyberTwin Backend", "version": "6.0.0", "status": "operational"}
+    return {"service": "CyberTwin Backend", "version": "7.0.0", "status": "operational"}
 
