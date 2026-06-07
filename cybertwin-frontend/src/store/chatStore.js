@@ -43,6 +43,18 @@ const useChatStore = create((set, get) => ({
         return msg;
     },
 
+    updateMessage: (id, updates) => {
+        set((state) => ({
+            messages: state.messages.map((m) => (m.id === id ? { ...m, ...updates } : m)),
+        }));
+    },
+
+    appendMessageText: (id, textChunk) => {
+        set((state) => ({
+            messages: state.messages.map((m) => (m.id === id ? { ...m, text: m.text + textChunk } : m)),
+        }));
+    },
+
     setLoading: (val) => set({ isLoading: val }),
 
     setSessionId: (id) => set({ sessionId: id }),

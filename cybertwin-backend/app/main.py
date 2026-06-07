@@ -131,6 +131,8 @@ app.include_router(incidents.router,   prefix="/api")
 app.include_router(actions_router,     prefix="/api")   # Phase 4
 app.include_router(simulation_router,  prefix="/api")   # Phase 5
 app.include_router(export_router,      prefix="/api")   # Phase 5
+from app.routers.settings import router as settings_router
+app.include_router(settings_router, prefix="/api") # Phase 8
 app.include_router(ml_router,          prefix="/api")   # Phase 6
 app.include_router(ws_router)
 

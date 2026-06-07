@@ -974,3 +974,77 @@ body {
     transform: translateY(0);
   }
 }
+
+/* ── Button Styles ── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border-radius: var(--radius-sm);
+  font-size: 13.5px;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: all 0.2s ease;
+  outline: none;
+  font-family: var(--font-sans);
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--clr-accent-cyan), var(--clr-accent-blue));
+  color: #0a0d14;
+  border: none;
+  box-shadow: var(--glow-cyan);
+}
+
+.btn-primary:hover:not(:disabled) {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.btn-primary:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.btn-secondary {
+  background: var(--clr-bg-elevated);
+  border-color: var(--clr-border);
+  color: var(--clr-text-secondary);
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background: rgba(99, 179, 237, 0.08);
+  border-color: var(--clr-border-bright);
+  color: var(--clr-text-primary);
+}
+
+.btn-secondary.active {
+  background: rgba(0, 229, 255, 0.1);
+  border-color: var(--clr-accent-cyan);
+  color: var(--clr-accent-cyan);
+}
+
+/* ── Input Styles ── */
+.form-input {
+  background: var(--clr-bg-elevated);
+  border: 1px solid var(--clr-border);
+  color: var(--clr-text-primary);
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  outline: none;
+  box-sizing: border-box;
+  font-family: var(--font-sans);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-input:focus {
+  border-color: var(--clr-accent-cyan);
+  box-shadow: var(--glow-cyan);
+}
+
+.form-input::placeholder {
+  color: var(--clr-text-muted);
+}

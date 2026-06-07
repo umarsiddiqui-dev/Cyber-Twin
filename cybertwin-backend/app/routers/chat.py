@@ -17,11 +17,14 @@ from app.database import get_db
 router = APIRouter(tags=["Chat"])
 
 
-@router.post("/chat", response_model=ChatResponse, summary="Send a message to CyberTwin AI")
+from fastapi.responses import StreamingResponse
+import json
+
+@router.post("/chat", summary="Send a message to CyberTwin AI (Streamed)")
 async def chat(body: ChatRequest, db: AsyncSession = Depends(get_db)):
     """
     Accepts a user message, queries the AI engine (with MITRE context),
-    persists the exchange, and returns the enriched reply.
+    and streams the reply via Server-Sent Events (SSE).
     """
     # Fetch recent incident titles for AI context injection
     recent_result = await db.execute(
@@ -31,30 +34,41 @@ async def chat(body: ChatRequest, db: AsyncSession = Depends(get_db)):
     )
     recent_incidents = [row[0] for row in recent_result.fetchall()]
 
-    # Call AI service (GPT-4o or offline fallback)
-    result = await get_response(
-        message=body.message,
-        session_id=body.session_id,
-        recent_incidents=recent_incidents,
-    )
+    from app.services.ai_service import get_response_stream
 
-    # Persist to database
-    log = ChatLog(
-        session_id=result["session_id"],
-        user_message=body.message,
-        bot_reply=result["reply"],
-    )
-    db.add(log)
-    await db.commit()  # explicitly commit — do not rely on implicit auto-commit
+    async def event_generator():
+        full_reply = ""
+        session_id = body.session_id
 
-    return ChatResponse(
-        reply=result["reply"],
-        session_id=result["session_id"],
-        timestamp=result["timestamp"],
-        mitre_id=result.get("mitre_id"),
-        mitre_tactic=result.get("mitre_tactic"),
-        mitre_technique=result.get("mitre_technique"),
-        confidence=result.get("confidence"),
-        risk_score=result.get("risk_score"),
+        async for chunk_json in get_response_stream(body.message, session_id, recent_incidents):
+            # Parse json to extract full_reply at the end
+            try:
+                data = json.loads(chunk_json)
+                if data.get("type") == "done":
+                    full_reply = data.get("full_reply", "")
+                elif data.get("type") == "metadata":
+                    session_id = data.get("session_id")
+            except:
+                pass
+            
+            yield f"data: {chunk_json}\n\n"
+        
+        # Persist to database after stream finishes
+        log = ChatLog(
+            session_id=session_id,
+            user_message=body.message,
+            bot_reply=full_reply,
+        )
+        db.add(log)
+        await db.commit()
+
+    return StreamingResponse(
+        event_generator(),
+        media_type="text/event-stream",
+        headers={
+            "Cache-Control": "no-cache",
+            "Connection": "keep-alive",
+            "X-Accel-Buffering": "no"
+        }
     )
 

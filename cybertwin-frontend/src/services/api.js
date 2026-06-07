@@ -58,6 +58,58 @@ export async function sendMessage(message, sessionId = null) {
     return response.data;
 }
 
+export async function* sendMessageStream(message, sessionId = null) {
+    const payload = { message };
+    if (sessionId) payload.session_id = sessionId;
+
+    const token = getToken();
+    const headers = { 'Content-Type': 'application/json' };
+    if (token) headers.Authorization = `Bearer ${token}`;
+
+    const response = await fetch('/api/chat', {
+        method: 'POST',
+        headers,
+        body: JSON.stringify(payload),
+    });
+
+    if (!response.ok) {
+        if (response.status === 401) {
+            logout();
+            window.location.href = '/login';
+        }
+        throw new Error('Network response was not ok');
+    }
+
+    const reader = response.body.getReader();
+    const decoder = new TextDecoder('utf-8');
+    let buffer = '';
+
+    while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+
+        buffer += decoder.decode(value, { stream: true });
+        
+        // Normalize Windows CRLF (\r\n) to LF (\n) to ensure split('\n\n') works
+        buffer = buffer.replace(/\r\n/g, '\n');
+        
+        const lines = buffer.split('\n\n');
+        buffer = lines.pop(); // keep the last incomplete chunk
+
+        for (const line of lines) {
+            if (line.startsWith('data: ')) {
+                const dataStr = line.slice(6);
+                try {
+                    const data = JSON.parse(dataStr);
+                    yield data;
+                } catch (e) {
+                    console.error('Error parsing SSE data', e);
+                }
+            }
+        }
+    }
+}
+
 // ── Health ────────────────────────────────────────────────────────────────────
 
 export async function checkHealth() {
@@ -127,6 +179,26 @@ export async function mlStatus() {
 export async function exportIncidents(format = 'json') {
     const response = await apiClient.get(`/export/incidents?format=${format}`, {
         responseType: format === 'csv' ? 'blob' : 'json',
+    });
+    return response.data;
+}
+
+// ── Settings (Phase 8) ────────────────────────────────────────────────────────
+export async function changePassword(payload) {
+    const response = await apiClient.post('/settings/change-password', payload);
+    return response.data;
+}
+
+export async function scanDevice() {
+    const response = await apiClient.post('/settings/scan/device', {});
+    return response.data;
+}
+
+export async function scanFile(formData) {
+    const response = await apiClient.post('/settings/scan/file', formData, {
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        }
     });
     return response.data;
 }

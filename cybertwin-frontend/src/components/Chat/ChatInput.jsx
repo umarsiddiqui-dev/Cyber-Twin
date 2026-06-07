@@ -55,19 +55,39 @@ function ChatInput() {
         try {
             // Pass the current sessionId for multi-turn conversation continuity
             const currentSessionId = useChatStore.getState().sessionId;
-            const data = await sendMessage(text, currentSessionId);
+            
+            // Create an empty bot message immediately to show streaming
+            const botMsg = addMessage('bot', '');
 
-            // Store reply with Phase 3 enrichment fields
-            addMessage('bot', data.reply, {
-                mitre_id: data.mitre_id,
-                mitre_tactic: data.mitre_tactic,
-                mitre_technique: data.mitre_technique,
-                confidence: data.confidence,
-                risk_score: data.risk_score,
-            });
+            const { sendMessageStream } = await import('../../services/api.js');
+            const generator = sendMessageStream(text, currentSessionId);
+            
+            let finalSessionId = null;
 
-            if (data.session_id) setSessionId(data.session_id);
-        } catch {
+            for await (const chunk of generator) {
+                if (chunk.type === 'metadata') {
+                    useChatStore.getState().updateMessage(botMsg.id, {
+                        mitre_id: chunk.mitre_id,
+                        mitre_tactic: chunk.mitre_tactic,
+                        mitre_technique: chunk.mitre_technique,
+                        confidence: chunk.confidence,
+                        risk_score: chunk.risk_score,
+                    });
+                    if (chunk.session_id) finalSessionId = chunk.session_id;
+                } else if (chunk.type === 'chunk') {
+                    useChatStore.getState().appendMessageText(botMsg.id, chunk.text);
+                } else if (chunk.type === 'done') {
+                    if (chunk.session_id) finalSessionId = chunk.session_id;
+                    if (chunk.full_reply) {
+                        // Ensure final text is exact in case of chunking issues
+                        useChatStore.getState().updateMessage(botMsg.id, { text: chunk.full_reply });
+                    }
+                }
+            }
+
+            if (finalSessionId) setSessionId(finalSessionId);
+        } catch (err) {
+            console.error(err);
             addMessage('bot', '⚠️ Unable to reach the backend. Please ensure the server is running on port 8000.');
         } finally {
             setLoading(false);

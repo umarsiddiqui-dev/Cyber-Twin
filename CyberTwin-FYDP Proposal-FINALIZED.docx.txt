@@ -1,0 +1,127 @@
+SIR SYED UNIVERSITY OF ENGINEERING AND
+TECHNOLOGY, KARACHI
+Final Year Design Project (FYDP) Proposal Form
+Project Title:
+Contact Details:
+Project Description:
+Project Objectives:
+Evidence from Recent Research Demonstrating the Need and Feasibility of CyberTwin:
+Project Methodology:
+We will use Agile Methodology.
+Project Hardware and Software Requirement:
+System Flow Chart:
+Project Gantt Chart:
+Project UML Modeling:
+Project Budgeting: (50,000 PKR)
+Note: Most tools (Python, TensorFlow, Rasa, Docker, PostgreSQL, CALDERA) are open-source, reducing cost significantly.
+Student Signature:                                                      .
+Student Name:  M. Umar Siddiqui.
+Student Signature:                                                 .
+Student Name: Abiha Afzal
+CyberTwin – AI Powered SOC Assistant
+Student’s Name | Student’s Roll Number | Mobile 
+Number | Email Address
+M. Umar Siddiqui | 2022F-BCNS-004 | +92 325-8734753 | umarsiddiquifcb@gmail.com
+Abiha Afzal | 2022F-BCNS-005 | +92 341-6280761 | afzalabiha05@gmail.com
+Supervisor’s Name | Designation | Mobile Number | Email Address
+Engr. Qurat-ul-Ain | Senior Lecturer | +92 21 34988000 | quratulain@ssuet.edu.pk
+External (Industrial) Supervisor | Designation | Mobile Number | Email Address
+Talha Maqsood | Software Engineer | 0344-1290058 | Talhamaqsood890@gmail.com
+Introduction:
+       In today’s rapidly evolving digital landscape, cyberattacks are more frequent, complex, and damaging than ever before. Security teams and individual users often struggle to respond quickly and effectively to these incidents due to limited expertise, delayed reaction times, and fragmented tools. This project introduces CyberTwin — an AI-powered virtual assistant that operates in real time to support cybersecurity analysts and users during live cyberattacks.
+      CyberTwin is designed to act as an intelligent companion (voice/text-based) that not only detects malicious activity but also recommends, explains, and helps execute countermeasures in real-time. By integrating threat intelligence, Natural Language Processing (NLP), and automation, CyberTwin empowers users to respond confidently and rapidly to threats, minimizing damage and downtime.
+
+Problem Statement:
+      Although Security Information and Event Management (SIEM) systems and antivirus software provide alerts and logs, they lack the contextual guidance or human-like advisory support during active attacks. In high-stress environments, even trained professionals may panic or take delayed action.
+      There is currently no accessible and intelligent assistant that simplifies the cyber incident response process for both professionals and less experienced users by providing real-time instructions and executing tasks under approval. This leads to longer incident resolution times, higher financial losses, and increased vulnerability.
+CyberTwin addresses this by acting as a copilot during cyberattacks, interpreting logs, cross-referencing threat databases (like MITRE ATT&CK), and giving voice- or text-based recommendations — making cyber defense proactive, guided, and far more efficient.
+
+Project related to the following SDGs:
+
+SDG4: Quality Education
+Target 4.4: Increase the number of youth and adults with relevant skills for employment and entrepreneurship.
+Relevance: CyberTwin helps students, SOC analysts, and professionals learn real-world cybersecurity response skills through guided interactions with live data, enhancing both education and practical experience.
+
+SDG 8: Decent Work and Economic Growth
+Target 8.2: Achieve higher levels of productivity through innovation and technology.
+Relevance: By automating and enhancing cyber response processes, CyberTwin increases the efficiency and effectiveness of cybersecurity operations in organizations.
+
+SDG 9: Industry, Innovation, and Infrastructure
+Target 9.5: Enhance scientific research and upgrade the technological capabilities of industrial sectors.
+Relevance: CyberTwin introduces an innovative AI system to the cybersecurity industry, contributing to smarter digital infrastructure and threat defense systems.
+
+SDG 10: Reduced Inequalities
+Target 10.2: Empower inclusion regardless of origin, gender, or status.
+Relevance: The platform is open-source and freely available, enabling users across developing countries to strengthen their cyber resilience, regardless of resources.
+
+SDG 16: Peace, Justice, and Strong Institutions
+Target 16.6: Develop effective, accountable, and transparent institutions.
+Relevance: CyberTwin promotes secure digital practices, supports better cyber governance, and ensures transparency in threat mitigation strategies.
+
+
+Features:
+AI-Powered Cybersecurity Assistant:
+Natural Language Processing (NLP)-based assistant that understands queries, responds with suggested actions, and guides users through incident resolution steps.
+Real-Time Threat Monitoring & Response:
+Detects suspicious activity using live logs and threat intelligence; suggests or automates appropriate actions based on severity.
+Command Execution with User Approval:
+Capable of running system-level commands (e.g., kill process, disable ports) upon user confirmation, reducing time to action during threats.
+Customizable Incident Playbooks:
+Embedded response workflows based on MITRE ATT&CK, adaptable to user environments or enterprise policies.
+
+Dashboard & Chat Interface (Web or Electron App):
+Provides a visual dashboard for alerts, user interactions, and action logs; chat interface for real-time query handling.
+Voice or Text Interaction Modes:
+Flexible input methods to enhance accessibility and usability under stressful conditions.
+Threat Intelligence Integration:
+Connects with free intelligence sources (MISP, MITRE, STIX) to provide context-aware recommendations.
+Risk Scoring System:
+Assesses and prioritizes incidents based on threat level, asset importance, and response history.
+Simulated Attack Scenarios:
+Uses tools like Atomic Red Team or CALDERA to practice and improve incident response capabilities in test environments.
+S.No. | Project Objectives | Completion Dates
+1. | Develop an intelligent desktop/web-based assistant that supports both voice and text interactions, enabling cybersecurity analysts and users to respond to real-time cyberattacks efficiently. The application will guide users through detection, triage, and response workflows using contextual insights and pre-trained AI models. | May, 2026
+2. | Integrate an AI-powered chatbot and Threat Intelligence (TI) engine to analyze live logs, suggest response actions, and explain threat context in simple terms. The chatbot will be trained using cybersecurity playbooks, such as MITRE ATT&CK, and offer command recommendations that the user can approve and execute. | May, 2026
+3. | Ensure the CyberTwin platform is secure and user-friendly, with robust authentication, real-time notifications, and incident simulation features using tools like CALDERA and Atomic Red Team. The final version will be ready for demonstration, showing live interaction with simulated threats and intelligent assistant responses. | June,2026
+S.No | Research Paper / Source | Year | Link | Key Focus | Relevance to CyberTwin
+1 | Towards AI-Driven Human-Machine Co-Teaming for Adaptive and Agile Cyber Security Operation Centers (arXiv) | 2025 | Link | LLM-based co-teaming in SOC workflows | Supports CyberTwin’s co-pilot design for real-time analyst support (arXiv)
+2 | Labeling NIDS Rules with MITRE ATT&CK Techniques: ML vs. LLMs (MDPI Big Data Cogn. Comput.) | 2025 | Link | LLMs auto-label intrusion rules with ATT&CK tactics | Enables CyberTwin to interpret events with ATT&CK context (MDPI)
+3 | Automated Mapping of CVEs to MITRE ATT&CK Tactics (Information – MDPI) | 2024 | Link | Transformer models mapping CVEs to ATT&CK tactics | Powers contextual countermeasures in CyberTwin (MDPI)
+4 | Explainable Artificial Intelligence for Cybersecurity (ScienceDirect) | 2022 | Link | XAI methods in security decision-making | Ensures transparency and trust in CyberTwin’s actions (ScienceDirect)
+5 | A Unified Framework for Human–AI Collaboration in SOCs with Trusted Autonomy (arXiv) | 2025 | Link | Autonomy tiering + trust and human-in-loop in SOCs | Aligns with CyberTwin’s approval/confirmation design (arXiv)
+6 | Advanced Automation via AI-Driven Cybersecurity Chatbot for Incident Response (IJARCCE) | 2024 | Link | NLP chatbot that acts (e.g. isolates compromised systems) | Demonstrates feasibility of CyberTwin’s chat interface & actions (Peer-reviewed Journal)
+7 | Towards Human-AI Teaming to Mitigate Alert Fatigue in Security Operations Centres (ACM) | 2024 | Link | Human-AI teaming to reduce SOC alert fatigue | Supports CyberTwin’s efficiency and cognitive support design (ACM Digital Library)
+8 | XAI for Cybersecurity: State of the Art… (arXiv) | 2022 | Link | Survey of XAI methods and challenges in cybersecurity | Grounds CyberTwin’s explainability features (arXiv)
+9 | The Role of LLMs in Human-AI Collaboration for Cybersecurity (arXiv) | 2025 | Link | LLMs as collaborators in tasks like phishing & intrusion detection | Validates CyberTwin’s bridge-the-gap conversational intelligence (arXiv)
+RAM | Minimum 16 GB
+Storage | SSD – Minimum 512 GB
+OS | Windows 10/11
+Programming Languages | Python 3.10+, JavaScript (Node.js)
+AI/ML Libraries | TensorFlow, PyTorch, Scikit-learn
+NLP Tools | spaCy, NLTK, OpenAI API, Rasa
+Database | PostgreSQL / MongoDB
+Cloud Services | Azure / AWS / Google Cloud (for deployment)
+DevOps Tools | Docker, GitHub, Jenkins
+Security Tools | Snort, OSSEC, Suricata (for attack data testing
+UI Framework | React.js / Angular (for dashboard & interface)
+IDE/Code Editor | VS Code / PyCharm
+Testing Tools | Postman, Selenium, JMeter
+Category | Description | Cost (PKR)
+Hardware | External storage, minor upgrades | 8,000
+APIs & Integrations | OpenAI API usage, optional premium services | 4,000
+Internet & Utilities | Internet charges, backup power | 10,000
+Documentation | Report printing and preparation | 3,000
+Contingency | Unexpected expenses | 5,000
+Others | Further Hardware & Premium tools upgradation (If required) | 20,000
+Total |  | 50,000
+Supervisor’s Signature
+Only for FUDPC Use 
+ 
+FYDPC 1:  Approve   Disapprove  	 	________________________________ 
+ 	 	 	 	 	 	 	 	 	Name & Signature 
+ 
+FYDPC 2:  Approve   Disapprove  	 	________________________________ 
+ 	 	 	 	 	 	 	 	 	Name & Signature 
+ 
+FYDPC 3:  Approve   Disapprove  	 	________________________________ 
+ 	 	 	 	 	 	 	 	 	Name & Signature

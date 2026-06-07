@@ -1,0 +1,256 @@
+GUIDELINES FOR MAKING FINAL YEAR DESIGN PROJECT REPORT
+The students of batch 2022F (Department of Telecommunication Engineering) are here directed to prepare their final year design project reports according to the guidelines provided in the following points.
+The color of front cover binding of the project report should be Teal, for all the students of Telecommunication Engineering Department.
+The project report should be hardbound.
+The front cover of the report should be in printed form along with the university logo.
+Top: 1inch	Left: 1.5 inches
+Right: 1 inch	Bottom: 1 inch
+The project serial number, title of the project and batch must be printed on the bind area of the report.
+Only the right side of pages of the report should be printed; the left side should be left blank.
+The font used should be Times New Roman, 12 points plain, with one-and-a-half (1.5) spacing between two consecutive lines.
+For sub-headings, increase one point and for main headings increase one more point.
+The overall number of pages in the report must be between 80 to 100.
+All the pages should be properly numbered at the bottom right of the page.
+Students must prepare a total of three copies of their report for Internal Advisor, FYDPC and Library.
+The students should get their project reports cross-checked by their Advisor/ Supervisor before submitting it to the FYDPC. Marks will be deduced from the reports not complying with the prescribed format.
+1.5 “	1 “
+COMPLETE NAME OF THE PROJECT AS APPROVED BY FYDPC
+B.S. TELECOMMUNICATION ENGINEERING, BATCH 20XX
+DEPARTMENT OF TELECOMMUNICATION ENGINEERING
+Sir Syed University Of Engineering and Technology
+20XX
+TITLE OF PROJECT
+BY
+Report submitted in partial fulfillment of the requirements for the degree of Bachelor of Science in Telecommunication Engineering
+DEPARTMENT OF TELECOMMUNICATION ENGINEERING
+SIR SYED UNIVERSITY OF ENGINEERING AND TECHNOLOGY, KARACHI
+DECLARATION
+I hereby declare that this project report entitled “PROJECT TITLE” is an original work carried out by Student 1, Student 2, Student 3 and Student 4 in partial fulfillment for the award of degree of Bachelor of Science in Telecommunication Engineering of Telecommunication Engineering Department, Sir Syed University of Engineering and Technology, Karachi, Pakistan during the year 20(n-1) to 20(n). The Project report has been approved as it satisfies the academic requirements in respect of project work prescribed for Bachelor of Science in Telecommunication Engineering.
+We also declare that it has not been previously and concurrently submitted for any other degree or other institutions.
+Student Name 	 Signature
+Student Name 	 Signature
+Student Name 	 Signature
+Student Name 	 Signature
+Supervisor Signature
+ACKNOWLEDGEMENT
+We would like to thank those who helped during our final year project. Without their support, we could have never accomplished this work.
+We take this special occasion to thanks our parents. We dedicated this work to our parents. It would have been simply impossible to start, continue and complete without the support of our parents who, unconditionally provided the resources to us.
+We are eternally indebted to our internal advisor Engr. XYZ for all the help, invaluable guidance and generous support throughout our final year project. We have been very fortunate to be associated with such a kind and good person and it would take more than a few words to express our sincere gratitude.
+Group Member Name 	Roll Number
+Group Member Name 	Roll Number
+Group Member Name 	Roll Number
+Group Member Name 	Roll Number
+ii
+CHAPTER THREE : SPECIFICATIONS OF THE REPORT
+CHAPTER FOUR : FORMAT OF THE REPORT
+4.1	Introduction
+REFERENCES
+Page
+1.1	Comparison of East, West and North in last four years	1
+ABSTRACT
+Abstract normally consists of four main parts. The first part of the abstract is a short introduction to the project that you have done. It is normally covered in 2 to 3 sentences. It is not to introduce what will be done, what has not been done and the objective of the project. Moreover, it is not a general introduction that is not from how you work in your project. The second part of the abstract is a brief and concise description of the project implementation. It is normally a summary from chapter’s details of the design and from system hardware and software. It can include the operation of your project product (for hardware or software type) in brief. Model numbers of specific or rare items (hardware or software) can be mentioned. This part is limited to 150 words. The third part of the abstract is a summary of important or significant results and discussion. The results or data and the discussion can be combined and presented in this part. Data/results can be mentioned in the form of relative manner, e.g. x is proportional to y with proportional constant of w or x = wy. Performance of hardware or software can be either quantitative or qualitative (descriptive) but the descriptive form should be result oriented. Important comparisons between theoretical and ideal cases and practical cases can also be included. The fourth part of the abstract is important or overall conclusion. Only the important or significant conclusions from chapter ‘conclusion’ are presented here. Alternatively, an overall conclusion which combines all the individual conclusions can be included here. Please note that the abstract CANNOT be included with the items such as: Issues related to personal, e.g. learned a lot of things from this project. First or second person pronouns e.g. I, we, you, me, my, etc. Outline of chapters in your project report. Any issues that are not produced from your project. Reference index or number.
+CHAPTER ONE
+INTRODUCTION
+INTRODUCTION
+A final year project report should include all the necessary sections, targeting a reader who does not necessarily have any prior knowledge about the project. It should have a logical flow with strong explanation to convince the reader of the conclusions of the report. It should be well written and should provide easy understanding. Excessive technical jargon and slang should be avoided.
+To ensure the report is easy to read with consistent format, it is important that students follow strictly the instruction during report preparation. Only the reports according to the above format will be considered and graded. The details about the structure of the project report are enclosed. For more information, please contact the FYDP Committee.
+90
+80
+70
+60
+1999	2000	2001	2002
+Figure 1.1: Comparison of East, West and North in last four years
+CHAPTER TWO
+SUBMISSION OF THE REPORT
+INTRODUCTION
+Students intending to submit their FYDP report should comply with the following procedures:
+Submission of soft cover report 1 copy on/before due date. The soft cover copy should bound black comb binding.
+Submission of hard cover final report 3 copies for the university (1 for library, 1 for department and 1 for internal) and softcopy of final report (1 copy in DVD that includes the code and all necessary information including software and relevant data sheet, images etc.).
+CHAPTER THREE
+SPECIFICATIONS OF THE REPORT
+LENGTH OF REPORT
+Final year design project report must not exceed 100 pages including the appendices. The total number of pages for all relevant data sheets must not be more than 15 pages.
+LANGUAGE OF REPORT
+Report must be written in consistent style of ENGLISH.
+COVER AND BINDING
+The soft cover copy must be bound using BLACK COMB BINDING. The hard cover of the final report shall be in TEAL Color with GOLD LETTERING. The blank sheet
+of paper should be put before the title page and another blank paper should be attached before the back cover.
+FRONT COVER AND TITLE PAGE
+FRONT COVER
+It is very important that students strictly follow the standard format for the front cover of the FYDP report. The front cover should contain the following items:
+Title of the project (Times New Roman 22 bold, UPPERCASE and CENTRALISE)
+Degree Title and Batch (Times New Roman 16 bold, UPPERCASE and CENTRALIZE)
+Internal and External advisor names (Two Column, Times New Roman, 16 Bold, Capitalize Each Word CASE and Aligned Left)
+Students Name and Roll Number (Times New Roman, 16 bold, UPPERCASE and CENTRALISE)
+The logo of SSUET must be placed
+Department	Name (Times New Roman,	18	bold, UPPERCASE and CENTRALISE)
+University Name (Times New Roman, 18 bold, Capitalize Each Word CASE and CENTRALISE)
+Month and year of FYDP report submission (Times New Roman, 14, UPPERCASE and CENTRALISE). It is normally month and year of FYDP Presentation.
+The title of the project should also be printed on the bind area of the report (Times New Roman,and UPPERCASE).
+TITLE OF REPORT
+The Title of FYDP report should contain the following items:
+Title of the project (Times New Roman, 12 bold, UPPERCASE and CENTRALISE)
+Students Name and ID (Times New Roman, 16 bold, UPPERCASE and CENTRALISE)
+Declaration (Times New Roman, 12 bold, Sentence case and CENTRALISE)
+Department and University Name (Times New Roman, 15 bold, UPPERCASE and CENTRALISE)
+Month and year of FYDP report submission (Times New Roman,12 bold, UPPERCASE and CENTRALISE). It is normally month and year of FYDP final presentation.
+TEXT, FONT SIZE AND SPACING
+Text should be typed, double spaced, left-right justified on one side of the paper only. TIMES NEW ROMAN font, font size of 12 point should be used throughout the report (except for Appendices), which includes Acknowledgement page, Abstract, Table of Content, List of Table, List of Figure and the main body of the text (which covers the main text, chapters, subtitles, headings, subheadings, figure captions, table captions, header and footers).
+Single spacing can be use for references, captions of figure, long tables, table titles, long quotations, notes, footnotes, and multi-line caption.
+For formulas, use equation editor (default setup is recommended) including subscripts and superscripts. Equations must be centered and numbered according to its sequences of order within the chapter.
+A new paragraph at the bottom of a must have at least 2 full lines or it should begin on the next page.
+SUBDIVISION
+Text in each chapter can be divided under headings and sub-heading such as 1.1, 1.2,
+1.3 etc and 1.1.1, 1.1.2, etc.
+MARGINS
+All text, tables, figures and their captions must conform to the following margins: Top	1 inch
+Bottom	1 inch
+Right	1 inch
+Left	1.5 inch
+PAPER AND PRINTING
+High quality 80gm A4 size paper shall be used. The paper should be white in colour, acid free and ‘non-erasable’ kind. For printing, a laser printer or other high quality printer is recommended. Computer paper or carbon copies are not allowed.
+PAGINATION
+All Page numbers are without punctuation placed 1 cm from Bottom edge
+Every page except the title page must be numbered.
+Title page is ‘i’ but is not numbered. Preliminary page are to be numbered in lower case Roman numerals (ii, iii, ivetc).
+The main text pages are to be numbered in Arabic numerals (1, 2, 3. etc) and all pages must be numbered consecutively and continuously.
+CORRECTIONS
+Correction of typing errors, or changes in the text, figures or tables, must be made as cleanly and invisibly as possible. Correction fluid shall NOT be used. Corrections should be made on the original before recopying or reprinting the problem page.
+TABLES
+Tables should be:
+The caption of the table must be placed above the table.
+Properly centered within the margin.
+Numbered in relation to chapter. e.g. in Chapter 1, table should be numbered Table 1.1, Table 1.2, Table 2.1 and so on.
+Numbered in Arabic numeral (Table 1.1, Table 1.2 etc) and a caption.
+Number must correspond with text.
+Place tables near to related discussion in text.
+Use the word Table or TABLE.
+Table 3.1: Comparison of different grades in last one year[1]
+FIGURE
+Figures can be illustrations, graphs or anything other than tables, scripts and plates (photographs are regarded as plates). All figures must be placed near to related discussion in text. The figure can be refer using the word Figure or Fig. and numbered in Arabic numeral e.g. Fig. 1.1, Fig 1.2, Figure 2.1 and so on.
+NOTES AND FOOTNOTES
+Footnotes and notes are not encouraged and should be kept to a minimum. However, if required its font size must be smaller then general text.
+USAGE OF COLOUR IN REPORT
+The usage of colour in the reports should be minimized as much as possible. Some examples where colours should be avoided are Graphs, Tables, and Texts.
+Softcopy of the FYDP Report
+The softcopy of the FYDP report is also submit along with the final 3 copies of FYDP report. The CD should contain FYDP report in word and pdf format in separate folders. In addition, project images, data sheets, soft code, software and all necessary information should be submitted in separate folder. The front cover of the CD should contain the following items:
+Title of the project (Times New Roman, 10 bold, UPPERCASE and CENTRALISE)
+The logo of SSUET must be placed.
+University Name (Times New Roman, 10 bold, UPPERCASE and CENTRALISE)
+Month and year of FYDP report submission (Times New Roman, 10 bold, UPPERCASE and CENTRALISE). It is normally the month and year of FYDP Presentation.
+The top of the CD only contains the title of the project (Times New Roman,10 bold, UPPERCASE and CENTRALISE) and month and year of FYDP report submission.
+CHAPTER FOUR FORMAT OF THE REPORT
+4	INTRODUCTION
+Every report is composed of 3 parts namely the Preliminaries, the Text and the Reference Material. Each part is arranged in a numerical sequence of chapters.
+The PRELIMINARY PAGES should include the following sections according to the given order:
+Title page
+Acknowledgements
+Abstract
+Table of Contents
+List of Tables
+List of Figures, Illustrations, etc
+The MAIN TEXT should normally be divided into chapters such as:
+Chapter 1: Introduction
+Chapter 2: Theoretical Background or Review of Literature
+Chapter 3: Method of Investigation or Detailed of the Design (system flow diagram or experimental setup)
+Chapter 4: System hardware
+Chapter 5: System software
+Chapter 6: Result and Discussions
+Chapter 7: Conclusion and Future Works
+Chapter divisions shown here are given as examples. It is up to writer to properly organized, structured, and present the main text correctly, depending on the nature of the project. The project members may ask from their internal/external advisor(s) for proper guidance on chapters distribution.
+The REFERENCE MATERIAL may consist of:
+Reference
+Glossary
+Appendices
+REFERENCES
+All the references must be written in the Harvard citation style. Few examples of Harvard style presentation are given below. For complete Harvard style presentation, please visit the Harvard referencing website.
+Article: Periodical - journal has a volume number and an issue number
+Author. Date. Title of article. Title of journal, volume of journal (number of issue):page reference, date of issue.
+KRUGER, J.P. 1988. Sexism in advertising. Communicare, 7(3):12-15, March 11.
+KLIMOSKI, R., & PALMER, S. 1993. The ADA and the hiring process in organisations. Consulting psychology journal: practice and research, 45(2):10-36.
+Book: Single author
+Author. Date. Title: subtitle. Place: Publisher.
+CHASE, Jennifer A. 1979. Advertising: the hits and myths. New York: Doubleday.
+Book: Multiple authors
+Authors. Date. Title: subtitle. Place: Publisher.
+HENDERSON, R.S., SMITH, P.G., ROSSITER, I. &KING, P.Q. 1987. The tenets
+of moral philosophy. New York: Van Nostrand.
+Conference proceedings
+Author. Date. Title of paper. Title of published document, Place and date of conference, page reference(s), Place (of publication): Publisher.
+TRUTER, Mavis. 1994. The role of the court interpreter in the new South Africa. Proceedings of the 1994 Conference of the South African Institute of Translators, Bloemfontein, 18-23 June 1994, pp. 46-59. Johannesburg: The Institute.
+Course notes
+Author. Date. Title: sub-title. Place: Name of Institution. [Indicate that these are course notes]
+VAN ASWEGEN, E.S. 2000. English literature: from Beowulf to Virginia Woolf. Cape Town: CapeTechnikon. [Course notes
+Internet
+Author. Date (last updated). Title of website. [Online]. Available: URL (Internet
+address). [Date you accessed the site].
+McKIERNAN, G. 1996. Project Aristotle(sm): automated caterogization of Web resources. [Online]. Available: http://www.public.iastate.edu/~CYBERSTACKS/Aristotle.htm [4 September 1996]
+CHAPTER 1 | 1 “ | INTRODUCTION
+Telecommunication Engineering Department |  | 
+Sir Syed University of Engineering and Technology               1 “ |  | PAGE NO
+Internal Advisor |  | External Advisor | 
+Internal Advisor | Name | External Advisor | Name
+Designation |  | Designation | 
+Department |  | Organization Name | Organization Name
+SSUET, Karachi |  | Karachi | 
+Submitted by | 
+GROUP MEMBER NAME | ROLL NUMBER
+GROUP MEMBER NAME | ROLL NUMBER
+GROUP MEMBER NAME | ROLL NUMBER
+GROUP MEMBER NAME | ROLL NUMBER
+GROUP MEMBER 1 | Roll number
+GROUP MEMBER 2 | Roll number
+GROUP MEMBER 3 | Roll number
+GROUP MEMBER 4 | Roll number
+ | TABLE OF CONTENTS | 
+ |  | Page
+ACKNOWLEDGEMENT | ACKNOWLEDGEMENT | ii
+TABLE OF CONTENTS | TABLE OF CONTENTS | iii
+LIST OF TABLES | LIST OF TABLES | v
+LIST OF FIGURES | LIST OF FIGURES | vi
+ABSTRACT | ABSTRACT | vii
+CHAPTER ONE : INTRODUCTION | CHAPTER ONE : INTRODUCTION | CHAPTER ONE : INTRODUCTION
+1.1 | Introduction | 1
+CHAPTER TWO : SUBMISSION OF THE REPORT | CHAPTER TWO : SUBMISSION OF THE REPORT | CHAPTER TWO : SUBMISSION OF THE REPORT
+2.1 | Introduction | 2
+2.2 | Submission of soft cover report | 2
+2.3 | Submission of hard cover report | 2
+3.1 | Length of report | Length of report | 3
+3.2 | Language of report | Language of report | 3
+3.3 | Cover and binding | Cover and binding | 3
+3.4 | Front cover and title page | Front cover and title page | 3
+ | 3.4.1 | Front cover | 3
+ | 3.4.2 | Title of report | 4
+3.5 | Text, font size and spacing | Text, font size and spacing | 4
+3.6 | Subdivision | Subdivision | 5
+3.7 | Margins | Margins | 5
+3.8 | Paper and printing | Paper and printing | 5
+3.9 | Pagination | Pagination | 5
+3.10 | Corrections | Corrections | 6
+3.11 | Tables | 6
+3.12 | Figures | 6
+3.13 | Notes and Footnotes | 7
+3.14 | Usage of Colour in report | 7
+3.15 | Softcopy of the FYDP report | 7
+ | Page
+3.1 | Comparison of different grades in last one year
+4.1 | Comparison of different grades in last two year
+4.2 | Comparison of different grades in last three year
+50 |  |  |  |  |  |  | East
+40 |  |  |  |  |  |  | West
+30 |  |  |  |  |  |  | North
+20 |  |  |  |  |  |  | 
+10 |  |  |  |  |  |  | 
+0 |  |  |  |  |  |  | 
+ |  | , X	) =
+t	t−1 | pt (Zt | Xt , | Z | ) p	(X |
+t−1	t−1	t | Z | , X	)
+t−1	t−2
+pt (Xt | | Z | , X	) =
+t	t−1 |  |  | pt (Zt ) |  | 3.1
+pt (Zt | Xt ) = pt (Zt | Xt , | Z | )
+t−1 | 3.2
+Grade | Grade | Grade | Grade | Grade | Passes
+A | B | C | D | E | Passes
+0 | 1 | 10 | 13 | 38 | 24
+(0.0%) | (0.0%) | (0.0%) | (0.0%) | (0.0%) | (0.0%)

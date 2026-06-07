@@ -1,0 +1,127 @@
+FINAL YEAR DESIGN PROJECT TITLE AS APPROVED BY FYDPC
+B.S. COMPUTER NETWORKS AND SECURITY
+ Batch 2022F
+Submitted by
+Department of Telecommunication Engineering
+SIR SYED UNIVERSITY OF ENGINEERING AND TECHNOLOGY
+2026
+FINAL YEAR DESIGN PROJECT TITLE AS APPROVED BY FYDPC
+BY
+Report submitted in partial fulfillment of the requirements for the degree of Bachelor of Science in Computer Networks and Security
+Department of Telecommunication Engineering
+SIR SYED UNIVERSITY OF ENGINEERING AND TECHNOLOGY
+2026
+DECLARATION
+We at this moment declare that this project report entitled “FINAL YEAR DESIGN PROJECT TITLE AS APPROVED BY FYDPC” submitted to the Department of Telecommunication Engineering is a record of original work carried out by us under the esteemed guidance of our supervisor SUPERVISOR’S NAME.
+This report embodies our research and the work undertaken by us, and to the best of our knowledge, it contains no material previously published or written by another person except where due acknowledgment has been made. We have referenced all materials and sources used in the preparation of this report as per academic norms and standards.
+Additionally, this project report is submitted in partial fulfillment of the requirements for the Mobile Communication and Security degree.
+ACKNOWLEDGEMENT
+We would like to express our deepest gratitude to all those who provided us with the possibility to complete our final year project “FINAL YEAR DESIGN PROJECT TITLE AS APPROVED BY FYDPC.”
+First and foremost, we would like to thank our supervisor, SUPERVISOR’S NAME, for his continuous support, guidance, and encouragement throughout this project. His invaluable insights, expertise, and feedback have been crucial to the successful completion of this work.
+We are also grateful to the Department of Telecommunication Engineering for providing the necessary facilities and resources that enabled us to carry out our project smoothly. Our heartfelt thanks go to the faculty members and administrative staff for their assistance and cooperation.
+Furthermore, we wish to acknowledge our gratitude to all those who directly or indirectly contributed to this project. Special thanks to our peers and colleagues for their constructive suggestions and moral support.
+Finally, we would like to extend our sincere appreciation to our families and friends for their unwavering encouragement, patience, and understanding throughout this journey. Their constant support has been a source of motivation and strength for us.
+We are profoundly grateful to everyone who has helped us in bringing this project to fruition.
+Thank you all.
+Mapping of FYDP Report Chapters with the Graduating Attributes (GAs)
+Mapping of FYDP with Sustainable Development Goals
+TABLE OF CONTENTS
+LIST OF TABLES
+LIST OF FIGURES
+Internal Advisor
+SUPERVISOR’S NAME
+Assistant Professor / Lecturer 
+Department of Telecommunication Engineering
+Sir Syed University of Engineering and Technology, Karachi.
+Student’s Full Name | 2022F - BCNS - 001
+Student’s Full Name | 2022F - BCNS - 010
+Student’s Full Name | 2022F - BCNS - 012
+Student’s Full Name | 2022F - BCNS - 001
+Student’s Full Name | 2022F - BCNS - 010
+Student’s Full Name | 2022F - BCNS - 012
+Name: Student’s Full Name | Signature: _____________________
+Name: Student’s Full Name | Signature: _____________________
+Name: Student’s Full Name | Signature: _____________________
+Supervisor: SUPERVISOR’S NAME | Signature: _____________________
+ | Date: ______________
+Rubrics of Final Year Design Project | Rubrics of Final Year Design Project | Rubrics of Final Year Design Project | Rubrics of Final Year Design Project | Rubrics of Final Year Design Project | Rubrics of Final Year Design Project
+Criteria No. | Criteria GA
+(Percentage) | Excellent | Good | Fair | Poor
+1 | Writing Mechanics 
+GA-7
+Communication
+(10%) | The report covers all required project details/chapters and maintains the reader’s interest with a logical coherent flow. The structure is clear and concise. | The report covers all required project details/chapters. The structure is clear and concise. | The report shows some gaps in coverage of required project details/chapters. The structure contains repetitions and redundancies. | The report shows insufficient content to show that the required project details/chapters are met. Plain listing of information without regard to structure and/or flow.
+2 | Literature Review and Problem statement
+GA-3
+Problem Analysis
+(10%) | Literature is well-written and structured as per standards and covered all relevant material to the project. Problem statement is stated and covered sufficient justification. New reader can clearly understand its value and context.
+References are cited properly using a standard format | Literature is well-written but not properly structured as per standards and covered most of the material relevant to the project. Problem statement is stated and covered necessary justification with reference.
+References are cited using a standard format | Literature is not properly written and structured as per standards, but covered most of the material relevant to the project. Problem statement is stated but lacks necessary justification.
+References are cited using a standard format | Literature is poorly written, poorly structured and does not cover the relevant material to the project. Problem statement is vaguely stated without any justification.
+References are cited using a standard format.
+3 | Methodology
+GA-4
+Design / Development of Solution
+(10%) | The methods, approaches, tools, techniques, algorithms, or other aspects of the solution are well-described with sufficient details and supporting diagrams. | The methods, approaches, tools, techniques, algorithms, or other aspects of the solution are well-described. However further explanation is required. | The methods, approaches, tools, techniques, algorithms, or other aspects of the solution are described but not in a convincing manner. | Some aspects of the solution are described briefly but much of the description is left out.
+4 | Implementation and Testing
+GA-5 
+Modern Tool Usage
+(20%) | Both implementation and testing of a system, are precisely performed with accuracy and provide all necessary details for the reader. | Both implementation and testing of a system, are performed with the necessary details for the reader. | Implementation of a system are performed with the necessary details for the reader. But testing of a system is not properly performed. | Both implementation and testing of a system, are not properly performed with lack of details.
+5 | Results & Conclusions
+GA-2
+Knowledge for Solving Computing Problems
+(10%) | Report includes all key results of the project. Appropriate graphs, figures and tables are included for effective interpretation and explanation of the results. All important aspects of the project are well-summarized with the sense of closure and demonstrates the major outcome(s) of the project. | Report includes most of the key results of the project. Graphs, figures and tables are included for effective interpretation and explanation of the results. Most of the important aspects of the project are well-summarized with the sense of closure and demonstrates the outcome(s) of the project. | Includes few key results of the project. Graphs, figures and tables are included with limited interpretation and explanation of the results. Few aspects of the project are summarized with the sense of closure and demonstrates the outcome(s) of the project. | Key results of the project are missing. Graphs, figures and tables are not included. Important aspects of the project are not clearly summarized with.
+6 | Formatting Style and Similarity Index
+GA-9 
+Ethics
+(20%) | Formatting style of chapters, table of contents, title page, references and appendices are proper and relevant with an acceptable similarity index. | Formatting style of chapters, table of contents, title page, references and appendices are proper with only minor impact on flow of reading with acceptable similarity index | Formatting style is proper but figures and tables don’t follow standard practice (caption figure number etc.) with high but acceptable similarity index | The formatting of the chapters may need improvement with very high similarity index.
+7 | Project Sustainability Impacts 
+GA-8
+Computing Professionalism and Society 
+(20%) | The project provides solutions in societal benefit and demonstrate excellent knowledge of professional development. | The project provides solutions in societal benefit and demonstrate reasonable knowledge of professional development. | The project provides solutions in societal benefit and demonstrate average knowledge of professional development. | The project provides solutions in societal benefit and demonstrate poor knowledge of professional development.
+ | GA-7
+Communication
+(C1) | GA-3
+Problem Analysis
+(C2) | GA-4
+Design/ Development of Solution 
+(C3) | GA-5
+Modern Tool Usage
+(C4) | GA-2
+Knowledge for Solving Computing Problems 
+(C5) | GA-9
+Ethics
+(C6) | GA-8
+Computing Professionalism and Society 
+(C7)
+Chapter 1
+Introduction |  |  |  |  |  |  | 
+Chapter 2
+Literature Review |  |  |  |  |  |  | 
+Chapter 3
+Requirement Specification |  |  |  |  |  |  | 
+Chapter 4
+System Design |  |  |  |  |  |  | 
+Chapter 5
+System Development |  |  |  |  |  |  | 
+Chapter 6
+Testing |  |  |  |  |  |  | 
+Chapter 7
+Results |  |  |  |  |  |  | 
+Chapter 8
+Future work and discussion |  |  |  |  |  |  | 
+Chapter 9
+Conclusion |  |  |  |  |  |  | 
+Student’s Full Name | 2022F - BCNS - 001
+Student’s Full Name | 2022F - BCNS - 010
+Student’s Full Name | 2022F - BCNS - 012
+Supervisor: | Signature:
+SUPERVISOR’S NAME | _____________________
+SDG-3 Good Health and Well 
+Being | SDG-9: Industry Innovation 
+and Infrastructure
+ | 
+SDG-11: Sustainable Cities 
+and Communities | SDG-17: Partnerships for 
+The Goals
+ | 

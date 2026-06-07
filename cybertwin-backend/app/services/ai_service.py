@@ -165,8 +165,30 @@ async def get_response(
     # ── Step 3a: Ollama (gemma4:e2b) – PRIMARY ───────────────────────────────
     reply_text = None
     try:
-        # Gather project context to inject into the 128K window
-        project_ctx = get_project_context()
+        # Determine if we should inject the full codebase context to speed up inference
+        lower_msg = message.lower()
+        code_keywords = [
+            "code", "source", "file", "script", "implement", "function", "class", 
+            "route", "directory", "folder", "backend", "frontend", "database", 
+            "model", "endpoint", "api.js", "auth.js", "schema", "docker", "yaml",
+            "repo", "repository", "codebase", "package.json", "requirements.txt",
+            ".py", ".jsx", ".js", ".html", "config.py", "main.py"
+        ]
+
+        if any(kw in lower_msg for kw in code_keywords):
+            # Gather project context to inject into the window (uses in-memory cache)
+            project_ctx = get_project_context()
+            logger.info("[AI] Injected full project context for code-related query")
+            num_ctx = 8192
+        else:
+            project_ctx = (
+                "CyberTwin project codebase structure:\n"
+                "- Backend: FastAPI app in cybertwin-backend/\n"
+                "- Frontend: React app in cybertwin-frontend/\n"
+                "Detailed source files omitted to optimize response speed (user is asking a general security or operational query)."
+            )
+            logger.info("[AI] Omitted detailed project context to optimize response speed")
+            num_ctx = 2048
 
         # Gather ML model + knowledge-base metadata
         try:
@@ -207,6 +229,7 @@ async def get_response(
         reply_text = await ollama_generate(
             prompt=full_prompt,
             system=CYBERTWIN_SYSTEM_PROMPT,
+            num_ctx=num_ctx,
         )
         if reply_text:
             logger.info("[AI] Response served by Ollama (gemma4:e2b)")
@@ -278,3 +301,85 @@ async def get_response(
         "confidence":       mitre_match.confidence      if mitre_match else None,
         "risk_score":       query_risk,
     }
+
+
+from app.services.ollama_client import generate_stream as ollama_generate_stream
+import json
+
+async def get_response_stream(
+    message: str,
+    session_id: str | None = None,
+    recent_incidents: list | None = None,
+):
+    sid = session_id or str(uuid.uuid4())
+
+    mitre_match = mitre_service.classify(message)
+    mitre_context = mitre_service.format_mitre_context(mitre_match) if mitre_match else ""
+
+    query_risk = risk_scorer.score(severity="INFO", source="manual", mitre_match=mitre_match)
+
+    meta = {
+        "type": "metadata",
+        "session_id": sid,
+        "timestamp": datetime.now(timezone.utc).isoformat(),
+        "mitre_id": mitre_match.technique_id if mitre_match else None,
+        "mitre_tactic": mitre_match.tactic if mitre_match else None,
+        "mitre_technique": mitre_match.technique_name if mitre_match else None,
+        "confidence": mitre_match.confidence if mitre_match else None,
+        "risk_score": query_risk,
+    }
+    yield json.dumps(meta)
+
+    # Only inject minimal project context to keep prompt evaluation fast
+    project_ctx = "CyberTwin Architecture:\n- Backend: FastAPI, sqlite, ollama\n- Frontend: React, Vite\n- ML: LightGBM for threat detection."
+    num_ctx = 2048
+
+    try:
+        from ml_pipeline.cybertwin_core import agent as _agent
+        model_ready  = _agent._models.is_available() and _agent._models._loaded
+        classes      = list(_agent._models.le.classes_) if model_ready else []
+        mitre_count  = len(_agent._kb.mitre) if _agent._kb._loaded else 0
+        cve_count    = len(_agent._kb.cves) if _agent._kb._loaded else 0
+    except Exception:
+        model_ready, classes, mitre_count, cve_count = False, [], 0, 0
+
+    history = conversation_memory.get_history(sid)
+    history_text = ""
+    for turn in history[-2:]: # ONLY last 1 turn to optimize prompt size
+        role_label = "User" if turn["role"] == "user" else "CyberTwin"
+        history_text += f"\n{role_label}: {turn['content']}"
+
+    ml_section = (
+        f"\n\n[ML Engine]\n"
+        f"- Status: {'ACTIVE' if model_ready else 'INACTIVE'}\n"
+    )
+    mitre_section = f"\n[MITRE Match]\n{mitre_context}" if mitre_context else ""
+    incidents_section = ""
+    if recent_incidents:
+        inc_text = "\n".join(f"- {i}" for i in recent_incidents[:5])
+        incidents_section = f"\n[Recent Incidents]\n{inc_text}"
+
+    full_prompt = (
+        f"[PROJECT SOURCE FILES]\n{project_ctx}\n"
+        f"{ml_section}{mitre_section}{incidents_section}"
+        f"{history_text}\n\nUser: {message}\nCyberTwin:"
+    )
+
+    full_reply = ""
+    streamed_any = False
+    try:
+        async for chunk in ollama_generate_stream(prompt=full_prompt, system=CYBERTWIN_SYSTEM_PROMPT, num_ctx=num_ctx):
+            streamed_any = True
+            full_reply += chunk
+            yield json.dumps({"type": "chunk", "text": chunk})
+    except Exception as e:
+        logger.error(f"[AI Stream] Error: {e}")
+
+    if not streamed_any:
+        # Fallback offline
+        full_reply = _build_offline_response(message, mitre_match)
+        yield json.dumps({"type": "chunk", "text": full_reply})
+
+    conversation_memory.add_turn(sid, message, full_reply)
+    yield json.dumps({"type": "done", "full_reply": full_reply})
+

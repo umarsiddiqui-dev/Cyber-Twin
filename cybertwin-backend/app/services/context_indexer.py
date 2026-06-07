@@ -85,13 +85,21 @@ def _walk_tree(root: Path) -> list[Path]:
     return results
 
 
-def get_project_context() -> str:
+_cached_context: str | None = None
+
+
+def get_project_context(bypass_cache: bool = False) -> str:
     """
     Build and return the full project context string.
+    Uses in-memory caching unless bypass_cache is True.
 
     Each file is wrapped in a header so Gemma can refer to it by name.
     The total output is capped at MAX_CHARS.
     """
+    global _cached_context
+    if _cached_context is not None and not bypass_cache:
+        return _cached_context
+
     files = _walk_tree(_BACKEND_ROOT)
     chunks: list[str] = []
     total_chars = 0
@@ -120,12 +128,12 @@ def get_project_context() -> str:
         chunks.append(block)
         total_chars += len(block)
 
-    context = "".join(chunks)
+    _cached_context = "".join(chunks)
     logger.info(
         f"[ContextIndexer] Indexed {len(files)} files → "
         f"{total_chars:,} chars bundled for LLM context"
     )
-    return context
+    return _cached_context
 
 
 def get_project_summary() -> dict:

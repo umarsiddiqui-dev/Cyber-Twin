@@ -18,9 +18,9 @@ const navItems = [
 ];
 
 const monitorItems = [
-    { label: 'Alerts', icon: ShieldAlert, to: '#', disabled: true },
-    { label: 'Live Feed', icon: Activity, to: '#', disabled: true },
-    { label: 'Reports', icon: FileText, to: '#', disabled: true },
+    { label: 'Alerts', icon: ShieldAlert, to: '/alerts' },
+    { label: 'Live Feed', icon: Activity, to: '/live-feed' },
+    { label: 'Reports', icon: FileText, to: '/reports' },
 ];
 
 function Sidebar() {
@@ -71,27 +71,27 @@ function Sidebar() {
                 })}
 
                 <span className="nav-section-label" style={{ marginTop: 8 }}>Monitor</span>
-                {monitorItems.map(({ label, icon: Icon }) => (
-                    <button
+                {monitorItems.map(({ label, icon: Icon, to }) => (
+                    <NavLink
                         key={label}
-                        className="nav-item"
-                        disabled
-                        title="Available in Phase 2"
-                        style={{ opacity: 0.4, cursor: 'not-allowed' }}
+                        to={to}
+                        className={({ isActive }) => `nav-item${isActive ? ' active' : ''}`}
                     >
                         <span className="nav-item-icon">
                             <Icon size={16} />
                         </span>
                         {label}
-                        <span style={{ marginLeft: 'auto', fontSize: 9, letterSpacing: 0.5, color: 'var(--clr-accent-yellow)' }}>P2</span>
-                    </button>
+                    </NavLink>
                 ))}
 
                 <span className="nav-section-label" style={{ marginTop: 8 }}>System</span>
-                <button className="nav-item" disabled style={{ opacity: 0.4, cursor: 'not-allowed' }}>
+                <NavLink
+                    to="/settings"
+                    className={({ isActive }) => `nav-item${isActive ? ' active' : ''}`}
+                >
                     <span className="nav-item-icon"><Settings size={16} /></span>
                     Settings
-                </button>
+                </NavLink>
             </nav>
 
             {/* Footer status */}
